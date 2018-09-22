@@ -502,7 +502,7 @@ def predictor_one(data,data_labels,data_iterator,starters):
                     dividend=p_pred+p_gbrt+p_ada
                     data.loc[0,'prediction_final_'+name+str(starters.index(q))]=(p_pred*data['predictions_'+name+str(starters.index(q))][0]+p_gbrt*data['predictions_gbrt_'+name+str(starters.index(q))][0]+p_ada*data['predictions_ada_'+name+str(starters.index(q))][0])/dividend
 
-    file1=open('/home/p/PycharmProjects/project1/models_good_scaled/predictions1'+'.txt','w')
+    file1=open('folder address'+'.txt','w')
     file1.write(data.to_csv())
     file1.close()
 
@@ -548,7 +548,7 @@ def predictor(data,data_labels,starters):
                     data.loc[k,'prediction_final_'+name+str(starters.index(q))]=(p_pred*data['predictions_'+name+str(starters.index(q))][k]+p_gbrt*data['predictions_gbrt_'+name+str(starters.index(q))][k]+p_ada*data['predictions_ada_'+name+str(starters.index(q))][k])/dividend
 
 
-    file1=open('/home/p/PycharmProjects/project1/models_good_scaled/predictions1'+'.txt','w')
+    file1=open('folder address'+'.txt','w')
     file1.write(data.to_csv())
     file1.close()
 
@@ -725,7 +725,7 @@ def data_creator(ticker,comparison_symb,minute_number_of_data,minute_time_delta)
     
 def main():
 
-    file=pd.read_csv('/home/p/PycharmProjects/project1/file_machine_learning1.txt')
+    file=pd.read_csv('folder address where you saved featured data using previous functions'+'.txt')
     data1=pd.DataFrame(file)
     data1=data1.dropna()
     data1=data1.reset_index()
