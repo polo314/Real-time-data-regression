@@ -10,6 +10,7 @@ def main():
 
 
     loop_set=[3,5] #set of time windows for features computation
+    folder_address=''
 
     now=datetime.datetime.now()
     year=now.year
@@ -20,15 +21,15 @@ def main():
     windowrange=5
     hour_loading=' 10_00_00_.txt'
     for i in range(int(today)-windowrange,int(today)):
-        address='folder address'+'minuteBTC_'+str(year)+'-'+str(month)+'-'+str(i).zfill(2)+ hour_loading
+        address='folder_address'+'minuteBTC_'+str(year)+'-'+str(month)+'-'+str(i).zfill(2)+ hour_loading
         datafr = pd.read_csv(address)
         dataframetotal=pd.concat([dataframetotal,datafr]).reset_index(drop=True)
     dataframetotal=dataframetotal.drop(['Unnamed: 0'], axis=1)
-    file=open('folder address'+'name.txt','w')
+    file=open('folder_address'+'name.txt','w')
     file.write(dataframetotal.to_csv())
     file.close()
 
-    data = pd.read_csv('folder address'+'name.txt')
+    data = pd.read_csv('folder_address'+'name.txt')
     data = pd.DataFrame(data)
 
 
@@ -96,11 +97,11 @@ def main():
         local_entropy_low=entropy(data,'low_close'+str(loop_set[i]),local_variance_low,short_window)
         avg_entropy_low=movavg(data,entropy_low[1],short_window)
                                     #19
-    file1=open('folder address'+'dataframe_featured.txt','w')
+    file1=open('folder_address'+'dataframe_featured.txt','w')
     file1.write(data.to_csv())
     file1.close()
 
-    file1 = pd.read_csv('folder address'+'dataframe_featured.txt')
+    file1 = pd.read_csv('folder_address'+'dataframe_featured.txt')
     data=pd.DataFrame(file1)
 
     data=data.drop(['date'], axis=1)
@@ -111,7 +112,7 @@ def main():
     data=data.reset_index()
     data=data.drop(['index'],axis=1)
 
-    file2=open('folder address'+'dataframe_without_nan.txt','w')
+    file2=open('folder_address'+'dataframe_without_nan.txt','w')
     file2.write(data.to_csv())
     file2.close()
 
@@ -255,7 +256,7 @@ def main():
     predictors_final=pd.DataFrame()
 
     true_features=data1_3.iloc[0:1,:]
-    true_f=open('folder address'+'true_features.txt','w')
+    true_f=open('folder_address'+'true_features.txt','w')
     true_f.write(true_features.to_csv())
     true_f.close()
 
@@ -291,11 +292,11 @@ def main():
         predictors_final=pd.concat([predictors_final,predictors_1],axis=1)
     close_win=close_win.dropna()
 
-    file3=open('folder address'+'predictors_final.txt','w')
+    file3=open('folder_address'+'predictors_final.txt','w')
     file3.write(predictors_final.to_csv())
     file3.close()
 
-    data_pred1 = pd.read_csv('folder address'+'predictors_final.txt')
+    data_pred1 = pd.read_csv('folder_address'+'predictors_final.txt')
     data_pred1 = pd.DataFrame(data_pred1)
     data_pred1=data_pred1.drop(['Unnamed: 0'],axis=1)
 
