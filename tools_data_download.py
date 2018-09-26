@@ -477,7 +477,7 @@ def minute_price_historical(symbol, comparison_symbol, limit, aggregate, exchang
 
 
 
-def datasets(ticker, comparison_symb, minute_number_of_data, minute_time_delta,write): #write==1 to save data
+def datasets(ticker, comparison_symb, minute_number_of_data, minute_time_delta,folder_address,write): #write==1 to save data
 
     mdf = minute_price_historical(ticker, comparison_symb, minute_number_of_data, minute_time_delta)
 
@@ -489,19 +489,19 @@ def datasets(ticker, comparison_symb, minute_number_of_data, minute_time_delta,w
     if write==1:
         mtime=str(mdf.timestamp.max())
         name="minute"+ticker + "_"+mtime[:13]+ "_"+mtime[14:16]+ "_"+mtime[17:19]+"_"
-        minute_file=open('folder address'+name+'.txt','w+')
+        minute_file=open(folder_address+'.txt','w+')
         minute_file.write(mdf1.to_csv())
         minute_file.close()
 
     return mdf1
 
-def data_creator(ticker,comparison_symb,minute_number_of_data,minute_time_delta):
+def data_creator(ticker,comparison_symb,minute_number_of_data,minute_time_delta,folder_address):
 
     ticker='BTC'
     comparison_symb='EUR' #*****************['BTC', 'ETH', 'USD']
     minute_number_of_data=minute_number_of_data
     minute_time_delta = minute_time_delta # Bar width in minutes
-    mdf=datasets(ticker, comparison_symb, minute_number_of_data, minute_time_delta,0)
+    mdf=datasets(ticker, comparison_symb, minute_number_of_data, minute_time_delta,folder_address,0)
     return mdf
 
 def main():
@@ -510,7 +510,7 @@ def main():
     minute_number_of_data=9999
     minute_time_delta = 1 # Bar width in minutes
 
-    datasets(ticker,comparison_symb, minute_number_of_data, minute_time_delta,1)
+    datasets(ticker,comparison_symb, minute_number_of_data, minute_time_delta,folder_address,1)
     
 if __name__=='__main__':
     main()
